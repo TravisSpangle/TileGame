@@ -14,6 +14,8 @@
 - (void)loadTiles;
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer;
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
+
+	int panIteration, xIteration, yIteration;
 @end
 
 @implementation PuzzleController
@@ -23,6 +25,10 @@
 	self.view = [[[PuzzleView alloc] init] autorelease];
 	blankX = 2;
 	blankY = 2;
+	
+	panIteration = 0;
+	xIteration = 0;
+	yIteration = 0;
 }
 
 - (void)viewDidLoad;
@@ -75,40 +81,82 @@
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer;
 {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
-	UIView	*tappedView = [tapRecognizer view];
-	tappedView.center = CGPointMake(0, 0);
+	//UIView	*tappedView = [tapRecognizer view];
+	//tappedView.center = CGPointMake(0, 0);
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
 {
 
-	[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	UIView	*pannedView = [panRecognizer view];
 	
-	if (panRecognizer.state == UIGestureRecognizerStateChanged) {
-		CGPoint p = [panRecognizer translationInView:self.view];
-		NSLog(@"Translation: %@", NSStringFromCGPoint(p));
-		
-		//moving on x axis?
-		if (p.x != 0) {
-			NSLog(@"Moving on x axis");
-			
-		}
-				
-		//moving on y axis?
-		if (p.y != 0) {
-			NSLog(@"Moving on y axis");
-		}
-		
-		CGPoint newCenter = pannedView.center;
-		newCenter.x += p.x;
-		newCenter.y += p.y;
-		
-		pannedView.center = newCenter;
-		[self.view bringSubviewToFront:pannedView];
-		
-		[panRecognizer setTranslation:CGPointZero inView:self.view];
+	if (panRecognizer.state != UIGestureRecognizerStateChanged) {
+		//do not process of if this gesture is not part of a continuous change.
+		return;
 	}
+	
+	/*recieve the moving coordinates and stor into x/yIteration values. We want to collect this data for 4 touch notifications before we decide to move left or right. */
+	CGPoint p = [panRecognizer translationInView:self.view];
+
+	NSLog(@"Translation: %@", NSStringFromCGPoint(p));
+	xIteration += p.x;
+	yIteration += p.y;
+	NSLog(@"\tMoving x:%i y:%i", xIteration, yIteration);
+	
+	if(++panIteration < 4) {
+		return;
+	}else {
+		//reset for next decision.
+		panIteration = 0;
+	}
+	
+	//Do not allow the user to move anything during animation
+	[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+	
+	CGPoint newCenter = pannedView.center;
+	
+	if (xIteration <= -1) {
+		xIteration *= -1;
+	}
+	
+	if (yIteration <= -1) {
+		yIteration *= -1;
+	}
+	
+	if (xIteration > yIteration) {
+		//moving on x axis
+		NSLog(@"Moving on x axis x:%i y:%i", xIteration, yIteration);			
+		if (p.x >= -1) {
+			newCenter.x += 105;
+		}else {
+			newCenter.x += -105;
+		}
+		//newCenter.x += p.x;
+	}else {
+		NSLog(@"Moving on y axis x:%i y:%i", xIteration, yIteration);
+		if (p.y >= -1) {
+			newCenter.y += 105;
+		}else {
+			newCenter.y += -105;
+		}
+		//newCenter.y += p.y;
+	}
+	
+	//resetting count
+	xIteration = 0;
+	yIteration = 0;
+	
+	if (newCenter.x > 320 || newCenter.x < 5 || newCenter.y < 5 || newCenter.y > 310) {
+		[[UIApplication sharedApplication] endIgnoringInteractionEvents];
+		return;
+	}
+	
+	pannedView.center = newCenter;
+	[self.view bringSubviewToFront:pannedView];
+	
+	[panRecognizer setTranslation:CGPointZero inView:self.view];
+	
 	[[UIApplication sharedApplication] endIgnoringInteractionEvents];
+	
 }
 @end

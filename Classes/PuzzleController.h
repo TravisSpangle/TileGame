@@ -13,6 +13,8 @@
 	
 	int blankX;
 	int blankY;
+	
+
 }
 
 @end

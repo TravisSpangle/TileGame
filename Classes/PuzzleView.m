@@ -9,7 +9,7 @@
 #import "PuzzleView.h"
 
 @implementation PuzzleView
-
+@synthesize x, y;
 
 - (id)initWithFrame:(CGRect)frame {
     

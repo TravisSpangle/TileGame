@@ -10,7 +10,10 @@
 
 
 @interface PuzzleView : UIView {
-
+	NSNumber * x;
+	NSNumber * y;
 }
+@property (nonatomic, retain) NSNumber * x;
+@property (nonatomic, retain) NSNumber * y;
 
 @end
