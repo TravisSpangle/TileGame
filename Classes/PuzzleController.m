@@ -16,12 +16,13 @@
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
 @end
 
-
 @implementation PuzzleController
 
 - (void)loadView;
 {
 	self.view = [[[PuzzleView alloc] init] autorelease];
+	blankX = 2;
+	blankY = 2;
 }
 
 - (void)viewDidLoad;
@@ -40,11 +41,12 @@
 	for (int row = 0; row < 3; row++) {
 		for (int col = 0; col < 3; col++) {
 			
-			if (row == 2 && col == 2) {
+			if (row == blankX && col == blankY) {
 				continue; //hole in tile
 			}
 			
-			UIView *tileView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+			//UIView *tileView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+			UIView *tileView = [[[PuzzleView alloc] initWithFrame:CGRectZero] autorelease];
 			tileView.backgroundColor = [UIColor greenColor];
 			tileView.layer.borderColor = [[UIColor blueColor] CGColor];
 			tileView.layer.borderWidth = 1.0;
@@ -90,6 +92,7 @@
 		//moving on x axis?
 		if (p.x != 0) {
 			NSLog(@"Moving on x axis");
+			
 		}
 				
 		//moving on y axis?

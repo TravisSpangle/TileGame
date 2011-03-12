@@ -10,7 +10,9 @@
 
 
 @interface PuzzleController : UIViewController {
-
+	
+	int blankX;
+	int blankY;
 }
 
 @end
