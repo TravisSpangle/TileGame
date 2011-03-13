@@ -14,6 +14,7 @@
 - (void)loadTiles;
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer;
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
+- (void)checkSolution;
 
 	int panIteration, xIteration, yIteration, puzzleSpacer;
 @end
@@ -176,14 +177,16 @@
 		return;
 	}
 	
-	if (xCoordinate != blankX && yCoordinate != blankY) {
+	if (xCoordinate != blankX || yCoordinate != blankY) {
 		//tile is not moving to the empty space, then it doesn't move
 		[[UIApplication sharedApplication] endIgnoringInteractionEvents];
 		return;
 	}
 	
+	//NSLog(@"Moving to blank position.\nblank:\tx:%i y:%i\ngoing:\tx:%i y:%i",blankX, blankY, xCoordinate, yCoordinate);
 	
-	NSLog(@"Blank position is at x:%i y:%i\n\t Moving tile into it from position x:%i y:%i\n\tTile Identifier:%i", blankX , blankY, [pannedView.xPosition integerValue], [pannedView.yPosition integerValue], [pannedView.identifier integerValue]);
+	
+	//NSLog(@"Blank position is at x:%i y:%i\n\t Moving tile into it from position x:%i y:%i\n\tTile Identifier:%i", blankX , blankY, [pannedView.xPosition integerValue], [pannedView.yPosition integerValue], [pannedView.orderId integerValue]);
 
 	//reset the blank coordinates
 	blankX = [pannedView.xPosition integerValue];
@@ -193,12 +196,30 @@
 	[pannedView setXPosition:[NSNumber numberWithInt:xCoordinate]];
 	[pannedView setYPosition:[NSNumber numberWithInt:yCoordinate]];
 	
-	pannedView.center = newCenter;
 	[self.view bringSubviewToFront:pannedView];
+	[PuzzleView animateWithDuration:0.1 animations:^{
+		pannedView.center = newCenter;
+	}];
 	
-	[panRecognizer setTranslation:CGPointZero inView:self.view];
+	//pannedView.center = newCenter;
+	//[panRecognizer setTranslation:CGPointZero inView:self.view];
 	
 	[[UIApplication sharedApplication] endIgnoringInteractionEvents];
 	
+	[self checkSolution];
 }
+
+- (void)checkSolution;
+{
+	for(PuzzleView *pv in self.view.subviews){
+		if([pv isKindOfClass:[PuzzleView class]]) {
+			//NSLog(@"object: %@",pv);	
+			if ([pv.orderId isKindOfClass:[NSNumber class]]) {
+				//NSLog(@"id:%@",[pv.orderId integerValue]);
+			}
+			//NSLog(@"id:%@",[pv.orderId integerValue]);
+		}
+	}
+}
+
 @end
