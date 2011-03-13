@@ -34,8 +34,13 @@
 	return pv;
 }
 - (void)drawRect:(CGRect)rect {
-	[nameLabel setText:@"1"];
-	//self.backgroundColor = [UIColor greenColor];
+	CGRect labelFrame = CGRectMake(0, 0, 100.0, 100.0);
+	nameLabel.frame = labelFrame;
+	
+	nameLabel.textAlignment = UITextAlignmentCenter;
+	nameLabel.backgroundColor = [UIColor greenColor];
+	
+	[nameLabel setText:[orderId description]];
 	
 	 //self.layer.borderColor = [[UIColor blueColor] CGColor];
 	// self.layer.borderWidth = 1.0;

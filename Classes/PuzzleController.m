@@ -68,8 +68,9 @@
 			[number setText:@"2"];
 			[tileView addSubview:number];
 			
-			//tileView.nameLabel = number;
-			 */
+			tileView.nameLabel = number;
+			*/
+			
 			
 			CGRect tileFrame = CGRectMake(0, 0, 100, 100);
 
