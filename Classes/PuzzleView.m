@@ -9,13 +9,16 @@
 #import "PuzzleView.h"
 
 @implementation PuzzleView
-@synthesize xPosition, yPosition;
+@synthesize xPosition, yPosition, identifier;
+@synthesize nameLabel;
 
 - (id)initWithFrame:(CGRect)frame {
     
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code.
+		nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+		[self addSubview:nameLabel];
+		[nameLabel release];
     }
     return self;
 }
@@ -29,8 +32,23 @@
 	return pv;
 }
 
-- (void)drawRect:(CGRect)rect {
++ (PuzzleView *)initWithIdWithPosition:(int)identifier_ xPosition:(int)xPosition_ yPosition:(int)yPosition_;
+{
+	PuzzleView *pv = [[[PuzzleView alloc] init] autorelease];
+	[pv setXPosition:[NSNumber numberWithInt:xPosition_]];
+	[pv setYPosition:[NSNumber numberWithInt:yPosition_]];
 	
+	[pv setIdentifier:[NSNumber numberWithInt:identifier_]];
+	
+	return pv;
+}
+- (void)drawRect:(CGRect)rect {
+	[nameLabel setText:@"1"];
+	//self.backgroundColor = [UIColor greenColor];
+	
+	 //self.layer.borderColor = [[UIColor blueColor] CGColor];
+	// self.layer.borderWidth = 1.0;
+
 }
 
 - (void)dealloc {

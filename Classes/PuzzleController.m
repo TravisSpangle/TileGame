@@ -46,6 +46,7 @@
 
 - (void)loadTiles;
 {
+	int idTracker = 0;
 	for (int row = 0; row < 3; row++) {
 		for (int col = 0; col < 3; col++) {
 			
@@ -53,11 +54,21 @@
 				continue; //hole in tile
 			}
 			
-			PuzzleView *tileView = [PuzzleView initWithPosition:col yPosition:row];
+			//PuzzleView *tileView = [PuzzleView initWithPosition:col yPosition:row];
+			PuzzleView *tileView = [PuzzleView initWithIdWithPosition:++idTracker xPosition:col yPosition:row];
 
 			tileView.backgroundColor = [UIColor greenColor];
 			tileView.layer.borderColor = [[UIColor blueColor] CGColor];
 			tileView.layer.borderWidth = 1.0;
+			
+			/*TODO: get this stuff in PuzzleView
+			 UILabel *number = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+			
+			[number setText:@"2"];
+			[tileView addSubview:number];
+			
+			//tileView.nameLabel = number;
+			 */
 			
 			CGRect tileFrame = CGRectMake(0, 0, 100, 100);
 
@@ -172,7 +183,7 @@
 	}
 	
 	
-	NSLog(@"Blank position is at x:%i y:%i\n\t Moving tile into it from position x:%i y:%i", blankX , blankY, [pannedView.xPosition integerValue], [pannedView.yPosition integerValue]);
+	NSLog(@"Blank position is at x:%i y:%i\n\t Moving tile into it from position x:%i y:%i\n\tTile Identifier:%i", blankX , blankY, [pannedView.xPosition integerValue], [pannedView.yPosition integerValue], [pannedView.identifier integerValue]);
 
 	//reset the blank coordinates
 	blankX = [pannedView.xPosition integerValue];
