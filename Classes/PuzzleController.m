@@ -212,6 +212,11 @@
 
 - (void)checkSolution;
 {
+	//blank space must be in bottom right corner to be solved
+	if (blankX !=2 || blankY != 2) {
+		return;
+	}
+	
 	int checkId =1;
 	BOOL solved = YES;
 	for(PuzzleView *pv in self.view.subviews){
