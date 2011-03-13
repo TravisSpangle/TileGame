@@ -53,9 +53,8 @@
 				continue; //hole in tile
 			}
 			
-			//UIView *tileView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
 			PuzzleView *tileView = [PuzzleView initWithPosition:col yPosition:row];
-			//UIView *tileView = [[[PuzzleView alloc] initWithFrame:CGRectZero] autorelease];
+
 			tileView.backgroundColor = [UIColor greenColor];
 			tileView.layer.borderColor = [[UIColor blueColor] CGColor];
 			tileView.layer.borderWidth = 1.0;
@@ -90,13 +89,13 @@
 
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
 {
-
-	//UIView *pannedView = [panRecognizer view];
 	PuzzleView *pannedView = (PuzzleView *)[panRecognizer view];
-	//TileView *piece = (TileView *)[gestureRecognizer view];
 	
 	if (panRecognizer.state != UIGestureRecognizerStateChanged) {
 		//do not process of if this gesture is not part of a continuous change.
+		panIteration = 0;
+		xIteration = 0;
+		yIteration = 0;
 		return;
 	}
 	
@@ -109,6 +108,7 @@
 	//NSLog(@"\tMoving x:%i y:%i", xIteration, yIteration);
 	
 	if(++panIteration < 4) {
+		//keep counting
 		return;
 	}else {
 		//reset for next decision.
@@ -120,6 +120,11 @@
 	
 	CGPoint newCenter = pannedView.center;
 	
+	int xCoordinate = [pannedView.xPosition integerValue] ;
+	int yCoordinate = [pannedView.yPosition integerValue];
+	
+	//making everything positive for a simplier comparison 
+	//TODO: does this provide accurate results for -1,+1 scenarios?
 	if (xIteration <= -1) {
 		xIteration *= -1;
 	}
@@ -133,7 +138,9 @@
 		//NSLog(@"Moving on x axis x:%i y:%i", xIteration, yIteration);			
 		if (p.x >= -1) {
 			newCenter.x += 105;
+			xCoordinate++;
 		}else {
+			xCoordinate--;
 			newCenter.x += -105;
 		}
 		//newCenter.x += p.x;
@@ -141,8 +148,10 @@
 		//NSLog(@"Moving on y axis x:%i y:%i", xIteration, yIteration);
 		if (p.y >= -1) {
 			newCenter.y += 105;
+			yCoordinate++;
 		}else {
 			newCenter.y += -105;
+			yCoordinate--;
 		}
 		//newCenter.y += p.y;
 	}
@@ -156,7 +165,22 @@
 		return;
 	}
 	
-	NSLog(@"Moving tile on x:%i y:%i", [pannedView.xPosition integerValue], [pannedView.yPosition integerValue]);
+	if (xCoordinate != blankX && yCoordinate != blankY) {
+		//tile is not moving to the empty space, then it doesn't move
+		[[UIApplication sharedApplication] endIgnoringInteractionEvents];
+		return;
+	}
+	
+	
+	NSLog(@"Blank position is at x:%i y:%i\n\t Moving tile into it from position x:%i y:%i", blankX , blankY, [pannedView.xPosition integerValue], [pannedView.yPosition integerValue]);
+
+	//reset the blank coordinates
+	blankX = [pannedView.xPosition integerValue];
+	blankY = [pannedView.yPosition integerValue];
+	
+	//reset tiles posistion
+	[pannedView setXPosition:[NSNumber numberWithInt:xCoordinate]];
+	[pannedView setYPosition:[NSNumber numberWithInt:yCoordinate]];
 	
 	pannedView.center = newCenter;
 	[self.view bringSubviewToFront:pannedView];

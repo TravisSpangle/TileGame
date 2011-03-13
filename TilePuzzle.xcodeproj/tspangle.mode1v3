@@ -350,7 +350,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>53E72549132C795C00D552D8</string>
+										<string>53E7254A132C904100D552D8</string>
 										<key>history</key>
 										<array>
 											<string>53DD7F99132AC3FE003EA112</string>
@@ -539,7 +539,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>321681756.24828601</real>
+	<real>321687617.98458397</real>
 	<key>ToolbarConfigUserDefaultsMinorVersion</key>
 	<string>2</string>
 	<key>ToolbarDisplayMode</key>
@@ -556,10 +556,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>53DD7F5C132ABFA9003EA112</string>
-		<string>/Users/tspangle/Dropbox/IPhone/TileGame/TilePuzzle.xcodeproj</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>53DD7F5C132ABFA9003EA112</string>
+		<string>/Users/tspangle/Dropbox/IPhone/TileGame/TilePuzzle.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 104 983 674 0 0 1280 778 </string>
@@ -778,7 +778,7 @@
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
@@ -943,7 +943,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
