@@ -42,7 +42,7 @@
 - (void)viewDidAppear:(BOOL)animated;
 {
 	[super viewDidAppear:animated];
-		[self loadTiles];
+	[self loadTiles];
 }
 
 - (void)loadTiles;
@@ -58,18 +58,10 @@
 			//PuzzleView *tileView = [PuzzleView initWithPosition:col yPosition:row];
 			PuzzleView *tileView = [PuzzleView initWithIdWithPosition:++idTracker xPosition:col yPosition:row];
 
-			tileView.backgroundColor = [UIColor greenColor];
 			tileView.layer.borderColor = [[UIColor blueColor] CGColor];
 			tileView.layer.borderWidth = 1.0;
 			
-			/*TODO: get this stuff in PuzzleView
-			 UILabel *number = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
-			
-			[number setText:@"2"];
-			[tileView addSubview:number];
-			
-			tileView.nameLabel = number;
-			*/
+			/*TODO: get this stuff in PuzzleView*/
 			
 			
 			CGRect tileFrame = CGRectMake(0, 0, 100, 100);

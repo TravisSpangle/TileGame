@@ -31,9 +31,13 @@
 	
 	[pv setOrderId:[NSNumber numberWithInt:identifier_]];
 	
+	[pv showIdentity];
+	
 	return pv;
 }
-- (void)drawRect:(CGRect)rect {
+
+- (void)showIdentity;
+{
 	CGRect labelFrame = CGRectMake(0, 0, 100.0, 100.0);
 	nameLabel.frame = labelFrame;
 	
@@ -41,10 +45,6 @@
 	nameLabel.backgroundColor = [UIColor greenColor];
 	
 	[nameLabel setText:[orderId description]];
-	
-	 //self.layer.borderColor = [[UIColor blueColor] CGColor];
-	// self.layer.borderWidth = 1.0;
-
 }
 
 - (void)dealloc {

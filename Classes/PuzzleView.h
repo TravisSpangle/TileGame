@@ -24,4 +24,6 @@
 
 + (PuzzleView *)initWithIdWithPosition:(int)identifier_ xPosition:(int)xPosition_ yPosition:(int)yPosition_;
 
+- (void)showIdentity;
+
 @end
