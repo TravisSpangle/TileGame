@@ -294,7 +294,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>8</integer>
+									<integer>6</integer>
 									<integer>2</integer>
 									<integer>1</integer>
 									<integer>0</integer>
@@ -320,7 +320,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>-1 184 982 593 0 0 1280 778 </string>
+						<string>0 185 982 593 0 0 1280 778 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -338,7 +338,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>PuzzleView.m</string>
+								<string>PuzzleController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -346,19 +346,18 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>PuzzleView.m</string>
+										<string>PuzzleController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>53BA6DF9132D649F00B98A2C</string>
+										<string>53BA6EC7132D846200B98A2C</string>
 										<key>history</key>
 										<array>
 											<string>53C5135F132B2210007BD040</string>
-											<string>53BA6C2C132D378F00B98A2C</string>
-											<string>53BA6DE2132D642600B98A2C</string>
 											<string>53BA6DE3132D642600B98A2C</string>
 											<string>53BA6DE4132D642600B98A2C</string>
-											<string>53BA6DF2132D646600B98A2C</string>
+											<string>53BA6EB7132D82F900B98A2C</string>
+											<string>53BA6EB8132D82F900B98A2C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -372,7 +371,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {774, 547}}</string>
 								<key>RubberWindowFrame</key>
-								<string>-1 184 982 593 0 0 1280 778 </string>
+								<string>0 185 982 593 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -392,7 +391,7 @@
 								<key>Frame</key>
 								<string>{{0, 552}, {774, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>-1 184 982 593 0 0 1280 778 </string>
+								<string>0 185 982 593 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -416,9 +415,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>53BA6BE2132D336500B98A2C</string>
+				<string>53BA6E64132D7DF300B98A2C</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>53BA6BE3132D336500B98A2C</string>
+				<string>53BA6E65132D7DF300B98A2C</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -539,7 +538,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>321741983.56653702</real>
+	<real>321750114.32969099</real>
 	<key>ToolbarConfigUserDefaultsMinorVersion</key>
 	<string>2</string>
 	<key>ToolbarDisplayMode</key>
@@ -556,16 +555,15 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>53DD7F5F132ABFA9003EA112</string>
-		<string>53BA6C01132D33CA00B98A2C</string>
-		<string>53BA6BF3132D338100B98A2C</string>
+		<string>53BA6E76132D7F3400B98A2C</string>
+		<string>53BA6E6F132D7F0500B98A2C</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>53DD7F5C132ABFA9003EA112</string>
 		<string>/Users/tspangle/Dropbox/IPhone/TileGame/TilePuzzle.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>-1 184 982 593 0 0 1280 778 </string>
+	<string>0 185 982 593 0 0 1280 778 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -586,7 +584,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>PuzzleView.h</string>
+								<string>PuzzleController.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -644,7 +642,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>53DD7F5C132ABFA9003EA112</string>
-				<string>53BA6B6A132D1C5600B98A2C</string>
+				<string>53BA6E46132D7CF500B98A2C</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -688,8 +686,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {302, 100}}</string>
-											<string>{{302, 0}, {348, 100}}</string>
+											<string>{{0, 0}, {302, 159}}</string>
+											<string>{{302, 0}, {348, 159}}</string>
 										</array>
 									</dict>
 									<key>VerticalSplitView</key>
@@ -704,8 +702,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {650, 100}}</string>
-											<string>{{0, 100}, {650, 278}}</string>
+											<string>{{0, 0}, {650, 159}}</string>
+											<string>{{0, 159}, {650, 219}}</string>
 										</array>
 									</dict>
 								</dict>
@@ -738,7 +736,7 @@
 										<real>118</real>
 									</array>
 									<key>Frame</key>
-									<string>{{302, 0}, {348, 100}}</string>
+									<string>{{302, 0}, {348, 159}}</string>
 									<key>RubberWindowFrame</key>
 									<string>26 133 650 419 0 0 1280 778 </string>
 								</dict>
@@ -766,13 +764,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>53BA6B6B132D1C7F00B98A2C</string>
+				<string>53BA6E47132D7CF500B98A2C</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>53BA6B6C132D1C7F00B98A2C</string>
-				<string>53BA6B6D132D1C7F00B98A2C</string>
-				<string>53BA6B6E132D1C7F00B98A2C</string>
-				<string>53BA6B6F132D1C7F00B98A2C</string>
-				<string>53BA6B70132D1C7F00B98A2C</string>
+				<string>53BA6E48132D7CF500B98A2C</string>
+				<string>53BA6E49132D7CF500B98A2C</string>
+				<string>53BA6E4A132D7CF500B98A2C</string>
+				<string>53BA6E4B132D7CF500B98A2C</string>
+				<string>53BA6E4C132D7CF500B98A2C</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -936,7 +934,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>53BA6B71132D1C7F00B98A2C</string>
+				<string>53BA6E66132D7DF300B98A2C</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

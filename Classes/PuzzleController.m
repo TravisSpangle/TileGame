@@ -9,12 +9,14 @@
 #import "PuzzleController.h"
 #import "PuzzleView.h"
 #import <QuartzCore/QuartzCore.h>
+#include <stdlib.h>
 
 @interface PuzzleController ()
 - (void)loadTiles;
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer;
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
 - (void)checkSolution;
+- (NSMutableArray *)randomOrder;
 
 	int panIteration, xIteration, yIteration, puzzleSpacer;
 @end
@@ -48,6 +50,8 @@
 - (void)loadTiles;
 {
 	int idTracker = 0;
+	NSMutableArray *order = [self randomOrder];
+	
 	for (int row = 0; row < 3; row++) {
 		for (int col = 0; col < 3; col++) {
 			
@@ -56,7 +60,7 @@
 			}
 			
 			//PuzzleView *tileView = [PuzzleView initWithPosition:col yPosition:row];
-			PuzzleView *tileView = [PuzzleView initWithIdWithPosition:++idTracker xPosition:col yPosition:row];
+			PuzzleView *tileView = [PuzzleView initWithIdWithPosition:[[order objectAtIndex: idTracker++] integerValue] xPosition:col yPosition:row];
 
 			tileView.layer.borderColor = [[UIColor blueColor] CGColor];
 			tileView.layer.borderWidth = 1.0;
@@ -80,6 +84,7 @@
 			
 			UIPanGestureRecognizer *panRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)] autorelease];
 			[tileView addGestureRecognizer:panRecognizer];
+
 
 		}
 	}
@@ -223,6 +228,31 @@
 	if (solved == YES) {
 		NSLog(@"Solved!");
 	}
+}
+
+- (NSArray *)randomOrder;
+{
+	NSMutableArray *order = [[[NSMutableArray alloc] init] autorelease];
+	[order addObject:[NSNumber numberWithInt:1]];
+	[order addObject:[NSNumber numberWithInt:2]];
+	[order addObject:[NSNumber numberWithInt:3]];
+	[order addObject:[NSNumber numberWithInt:4]];
+	[order addObject:[NSNumber numberWithInt:5]];
+	[order addObject:[NSNumber numberWithInt:6]];
+	[order addObject:[NSNumber numberWithInt:7]];
+	[order addObject:[NSNumber numberWithInt:8]];
+	//[order addObjectsFromArray:[NSArray 
+	
+	NSMutableArray *randOrder = [[[NSMutableArray alloc] init] autorelease];
+	
+	do {
+		int randomIndex = rand() % [order count];
+		NSLog(@"Random: %i: %i",randomIndex, [[order objectAtIndex:randomIndex] integerValue] );
+		[randOrder addObject:[order objectAtIndex:randomIndex]];
+		[order removeObjectAtIndex:randomIndex];
+	} while ([order count] > 0);
+	
+	return randOrder;
 }
 
 @end
