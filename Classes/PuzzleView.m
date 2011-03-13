@@ -9,7 +9,7 @@
 #import "PuzzleView.h"
 
 @implementation PuzzleView
-@synthesize xPosition, yPosition, identifier;
+@synthesize xPosition, yPosition, orderId;
 @synthesize nameLabel;
 
 - (id)initWithFrame:(CGRect)frame {
@@ -23,22 +23,13 @@
     return self;
 }
 
-+ (PuzzleView *)initWithPosition:(int)xPosition_ yPosition:(int)yPosition_;
-{
-	PuzzleView *pv = [[[PuzzleView alloc] init] autorelease];
-	[pv setXPosition:[NSNumber numberWithInt:xPosition_]];
-	[pv setYPosition:[NSNumber numberWithInt:yPosition_]];
-	
-	return pv;
-}
-
 + (PuzzleView *)initWithIdWithPosition:(int)identifier_ xPosition:(int)xPosition_ yPosition:(int)yPosition_;
 {
 	PuzzleView *pv = [[[PuzzleView alloc] init] autorelease];
 	[pv setXPosition:[NSNumber numberWithInt:xPosition_]];
 	[pv setYPosition:[NSNumber numberWithInt:yPosition_]];
 	
-	[pv setIdentifier:[NSNumber numberWithInt:identifier_]];
+	[pv setOrderId:[NSNumber numberWithInt:identifier_]];
 	
 	return pv;
 }
