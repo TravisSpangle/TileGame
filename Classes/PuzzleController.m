@@ -211,14 +211,19 @@
 
 - (void)checkSolution;
 {
+	int checkId =1;
+	BOOL solved = YES;
 	for(PuzzleView *pv in self.view.subviews){
 		if([pv isKindOfClass:[PuzzleView class]]) {
-			//NSLog(@"object: %@",pv);	
-			if ([pv.orderId isKindOfClass:[NSNumber class]]) {
-				//NSLog(@"id:%@",[pv.orderId integerValue]);
+			NSLog(@"Comparing check %i to id:%i", checkId, [pv.orderId integerValue]);
+			if (checkId++ != [pv.orderId integerValue]) {
+				solved = NO;
 			}
-			//NSLog(@"id:%@",[pv.orderId integerValue]);
 		}
+	}
+	
+	if (solved == YES) {
+		NSLog(@"Solved!");
 	}
 }
 
