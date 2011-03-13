@@ -9,7 +9,7 @@
 #import "PuzzleView.h"
 
 @implementation PuzzleView
-@synthesize x, y;
+@synthesize xPosition, yPosition;
 
 - (id)initWithFrame:(CGRect)frame {
     
@@ -18,6 +18,15 @@
         // Initialization code.
     }
     return self;
+}
+
++ (PuzzleView *)initWithPosition:(int)xPosition_ yPosition:(int)yPosition_;
+{
+	PuzzleView *pv = [[[PuzzleView alloc] init] autorelease];
+	[pv setXPosition:[NSNumber numberWithInt:xPosition_]];
+	[pv setYPosition:[NSNumber numberWithInt:yPosition_]];
+	
+	return pv;
 }
 
 - (void)drawRect:(CGRect)rect {

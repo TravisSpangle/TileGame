@@ -15,7 +15,7 @@
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer;
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
 
-	int panIteration, xIteration, yIteration;
+	int panIteration, xIteration, yIteration, puzzleSpacer;
 @end
 
 @implementation PuzzleController
@@ -25,6 +25,8 @@
 	self.view = [[[PuzzleView alloc] init] autorelease];
 	blankX = 2;
 	blankY = 2;
+	
+	puzzleSpacer = 5;
 	
 	panIteration = 0;
 	xIteration = 0;
@@ -52,15 +54,16 @@
 			}
 			
 			//UIView *tileView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-			UIView *tileView = [[[PuzzleView alloc] initWithFrame:CGRectZero] autorelease];
+			PuzzleView *tileView = [PuzzleView initWithPosition:col yPosition:row];
+			//UIView *tileView = [[[PuzzleView alloc] initWithFrame:CGRectZero] autorelease];
 			tileView.backgroundColor = [UIColor greenColor];
 			tileView.layer.borderColor = [[UIColor blueColor] CGColor];
 			tileView.layer.borderWidth = 1.0;
 			
 			CGRect tileFrame = CGRectMake(0, 0, 100, 100);
 
-			tileFrame.origin.x = (col * 100) + ((col + 1 ) * 5);
-			tileFrame.origin.y = (row * 100) + ((row + 1 ) * 5);
+			tileFrame.origin.x = (col * 100) + ((col + 1 ) * puzzleSpacer);
+			tileFrame.origin.y = (row * 100) + ((row + 1 ) * puzzleSpacer);
 			
 			
 			tileView.center = self.view.center;
@@ -73,7 +76,7 @@
 			
 			UIPanGestureRecognizer *panRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)] autorelease];
 			[tileView addGestureRecognizer:panRecognizer];
- 
+
 		}
 	}
 }
@@ -88,7 +91,9 @@
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
 {
 
-	UIView	*pannedView = [panRecognizer view];
+	//UIView *pannedView = [panRecognizer view];
+	PuzzleView *pannedView = (PuzzleView *)[panRecognizer view];
+	//TileView *piece = (TileView *)[gestureRecognizer view];
 	
 	if (panRecognizer.state != UIGestureRecognizerStateChanged) {
 		//do not process of if this gesture is not part of a continuous change.
@@ -98,10 +103,10 @@
 	/*recieve the moving coordinates and stor into x/yIteration values. We want to collect this data for 4 touch notifications before we decide to move left or right. */
 	CGPoint p = [panRecognizer translationInView:self.view];
 
-	NSLog(@"Translation: %@", NSStringFromCGPoint(p));
+	//NSLog(@"Translation: %@", NSStringFromCGPoint(p));
 	xIteration += p.x;
 	yIteration += p.y;
-	NSLog(@"\tMoving x:%i y:%i", xIteration, yIteration);
+	//NSLog(@"\tMoving x:%i y:%i", xIteration, yIteration);
 	
 	if(++panIteration < 4) {
 		return;
@@ -125,7 +130,7 @@
 	
 	if (xIteration > yIteration) {
 		//moving on x axis
-		NSLog(@"Moving on x axis x:%i y:%i", xIteration, yIteration);			
+		//NSLog(@"Moving on x axis x:%i y:%i", xIteration, yIteration);			
 		if (p.x >= -1) {
 			newCenter.x += 105;
 		}else {
@@ -133,7 +138,7 @@
 		}
 		//newCenter.x += p.x;
 	}else {
-		NSLog(@"Moving on y axis x:%i y:%i", xIteration, yIteration);
+		//NSLog(@"Moving on y axis x:%i y:%i", xIteration, yIteration);
 		if (p.y >= -1) {
 			newCenter.y += 105;
 		}else {
@@ -146,10 +151,12 @@
 	xIteration = 0;
 	yIteration = 0;
 	
-	if (newCenter.x > 320 || newCenter.x < 5 || newCenter.y < 5 || newCenter.y > 310) {
+	if (newCenter.x > 320 || newCenter.x < puzzleSpacer || newCenter.y < puzzleSpacer || newCenter.y > 310) {
 		[[UIApplication sharedApplication] endIgnoringInteractionEvents];
 		return;
 	}
+	
+	NSLog(@"Moving tile on x:%i y:%i", [pannedView.xPosition integerValue], [pannedView.yPosition integerValue]);
 	
 	pannedView.center = newCenter;
 	[self.view bringSubviewToFront:pannedView];

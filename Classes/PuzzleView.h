@@ -10,10 +10,12 @@
 
 
 @interface PuzzleView : UIView {
-	NSNumber * x;
-	NSNumber * y;
+	NSNumber * xPosition;
+	NSNumber * yPosition;
 }
-@property (nonatomic, retain) NSNumber * x;
-@property (nonatomic, retain) NSNumber * y;
+@property (nonatomic, retain) NSNumber * xPosition;
+@property (nonatomic, retain) NSNumber * yPosition;
+
++ (PuzzleView *)initWithPosition:(int)xCoordinate yPosition:(int)yCoordinate;
 
 @end

@@ -350,15 +350,15 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>53C5147F132BD8EC007BD040</string>
+										<string>53E72549132C795C00D552D8</string>
 										<key>history</key>
 										<array>
 											<string>53DD7F99132AC3FE003EA112</string>
-											<string>53C5135E132B2210007BD040</string>
 											<string>53C5135F132B2210007BD040</string>
-											<string>53C51360132B2210007BD040</string>
-											<string>53C51401132B3FFC007BD040</string>
-											<string>53C51402132B3FFC007BD040</string>
+											<string>53E72534132C78F600D552D8</string>
+											<string>53E72541132C794B00D552D8</string>
+											<string>53E72542132C794B00D552D8</string>
+											<string>53E72543132C794B00D552D8</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -416,9 +416,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>53C512FF132AFCA0007BD040</string>
+				<string>53E72506132BF82600D552D8</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>53C51300132AFCA0007BD040</string>
+				<string>53E72507132BF82600D552D8</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -539,7 +539,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>321640684.21516198</real>
+	<real>321681756.24828601</real>
 	<key>ToolbarConfigUserDefaultsMinorVersion</key>
 	<string>2</string>
 	<key>ToolbarDisplayMode</key>
@@ -556,10 +556,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>53DD7F5C132ABFA9003EA112</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/tspangle/Dropbox/IPhone/TileGame/TilePuzzle.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 104 983 674 0 0 1280 778 </string>
@@ -583,21 +583,21 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>PuzzleController.h</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {500, 218}}</string>
+								<string>{{0, 0}, {673, 266}}</string>
 								<key>RubberWindowFrame</key>
-								<string>48 232 500 500 0 0 1280 778 </string>
+								<string>10 229 673 548 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>218pt</string>
+							<string>266pt</string>
 						</dict>
 						<dict>
 							<key>BecomeActive</key>
@@ -616,9 +616,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 223}, {500, 236}}</string>
+								<string>{{0, 271}, {673, 236}}</string>
 								<key>RubberWindowFrame</key>
-								<string>48 232 500 500 0 0 1280 778 </string>
+								<string>10 229 673 548 0 0 1280 778 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXBuildResultsModule</string>
@@ -627,7 +627,7 @@
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>459pt</string>
+					<string>507pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -641,7 +641,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>53DD7F5C132ABFA9003EA112</string>
-				<string>53C51301132AFCA0007BD040</string>
+				<string>53E72502132BF82400D552D8</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -650,7 +650,7 @@
 			<key>WindowContentMinSize</key>
 			<string>486 300</string>
 			<key>WindowString</key>
-			<string>48 232 500 500 0 0 1280 778 </string>
+			<string>10 229 673 548 0 0 1280 778 </string>
 			<key>WindowToolGUID</key>
 			<string>53DD7F5C132ABFA9003EA112</string>
 			<key>WindowToolIsVisible</key>
@@ -685,8 +685,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {316, 202}}</string>
-											<string>{{316, 0}, {378, 202}}</string>
+											<string>{{0, 0}, {316, 203}}</string>
+											<string>{{316, 0}, {378, 203}}</string>
 										</array>
 									</dict>
 									<key>VerticalSplitView</key>
@@ -701,8 +701,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {694, 202}}</string>
-											<string>{{0, 202}, {694, 179}}</string>
+											<string>{{0, 0}, {694, 203}}</string>
+											<string>{{0, 203}, {694, 178}}</string>
 										</array>
 									</dict>
 								</dict>
@@ -735,7 +735,7 @@
 										<real>148</real>
 									</array>
 									<key>Frame</key>
-									<string>{{316, 0}, {378, 202}}</string>
+									<string>{{316, 0}, {378, 203}}</string>
 									<key>RubberWindowFrame</key>
 									<string>3 114 694 422 0 0 1280 778 </string>
 								</dict>
@@ -763,13 +763,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>53C51305132AFD0B007BD040</string>
+				<string>53E72508132BF82600D552D8</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>53C51306132AFD0B007BD040</string>
-				<string>53C51307132AFD0B007BD040</string>
-				<string>53C51308132AFD0B007BD040</string>
-				<string>53C51309132AFD0B007BD040</string>
-				<string>53C5130A132AFD0B007BD040</string>
+				<string>53E72509132BF82600D552D8</string>
+				<string>53E7250A132BF82600D552D8</string>
+				<string>53E7250B132BF82600D552D8</string>
+				<string>53E7250C132BF82600D552D8</string>
+				<string>53E7250D132BF82600D552D8</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -778,7 +778,7 @@
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
@@ -933,7 +933,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>53C5130B132AFD0B007BD040</string>
+				<string>53E7250E132BF82600D552D8</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
