@@ -96,7 +96,7 @@
 {	
 	UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[refreshButton addTarget:self 
-					  action:@selector(refreshPuzzle:)
+					  action:@selector(refreshPuzzle)
 			forControlEvents:UIControlEventTouchDown];
 	[refreshButton setTitle:@"Refresh" forState:UIControlStateNormal];
 	refreshButton.frame = CGRectMake(80.0, 375.0, 160.0, 40.0);
@@ -105,6 +105,13 @@
 
 - (void)refreshPuzzle;
 {
+	for(PuzzleView *pv in self.view.subviews){
+		if([pv isKindOfClass:[PuzzleView class]]) {
+			[pv removeFromSuperview];
+		}
+	}
+	
+	[self loadTiles];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer;
