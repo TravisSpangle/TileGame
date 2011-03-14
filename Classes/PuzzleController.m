@@ -13,9 +13,11 @@
 
 @interface PuzzleController ()
 - (void)loadTiles;
+- (void)loadEditButton;
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer;
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
 - (void)checkSolution;
+- (void)refreshPuzzle;
 - (NSMutableArray *)randomOrder;
 
 	int panIteration, xIteration, yIteration, puzzleSpacer;
@@ -45,6 +47,7 @@
 {
 	[super viewDidAppear:animated];
 	[self loadTiles];
+	[self loadEditButton];
 }
 
 - (void)loadTiles;
@@ -85,9 +88,23 @@
 			UIPanGestureRecognizer *panRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)] autorelease];
 			[tileView addGestureRecognizer:panRecognizer];
 
-
 		}
 	}
+}
+
+- (void)loadEditButton;
+{	
+	UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	[refreshButton addTarget:self 
+					  action:@selector(refreshPuzzle:)
+			forControlEvents:UIControlEventTouchDown];
+	[refreshButton setTitle:@"Refresh" forState:UIControlStateNormal];
+	refreshButton.frame = CGRectMake(80.0, 375.0, 160.0, 40.0);
+	[self.view addSubview:refreshButton];
+}
+
+- (void)refreshPuzzle;
+{
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer;
@@ -233,6 +250,7 @@
 - (NSArray *)randomOrder;
 {
 	NSMutableArray *order = [[[NSMutableArray alloc] init] autorelease];
+	//TODO:better way to do this?
 	[order addObject:[NSNumber numberWithInt:1]];
 	[order addObject:[NSNumber numberWithInt:2]];
 	[order addObject:[NSNumber numberWithInt:3]];
