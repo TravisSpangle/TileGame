@@ -39,8 +39,8 @@
 }
 
 - (void)viewDidLoad;
-{
-	self.view.backgroundColor = [UIColor orangeColor];
+{	
+	self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Background.png"]];
 }
 
 - (void)viewDidAppear:(BOOL)animated;

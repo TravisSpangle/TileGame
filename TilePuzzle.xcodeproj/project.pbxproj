@@ -15,6 +15,7 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
+		53BA6F65132DBC3A00B98A2C /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 53BA6F64132DBC3A00B98A2C /* Background.png */; };
 		53DD7F63132AC0CE003EA112 /* PuzzleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53DD7F62132AC0CE003EA112 /* PuzzleView.m */; };
 		53DD7F6B132AC13C003EA112 /* PuzzleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53DD7F69132AC13C003EA112 /* PuzzleController.m */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		28D801B30F44B63D00FB423F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* TilePuzzle_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TilePuzzle_Prefix.pch; sourceTree = "<group>"; };
+		53BA6F64132DBC3A00B98A2C /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		53DD7F61132AC0CE003EA112 /* PuzzleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleView.h; sourceTree = "<group>"; };
 		53DD7F62132AC0CE003EA112 /* PuzzleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PuzzleView.m; sourceTree = "<group>"; };
 		53DD7F68132AC13C003EA112 /* PuzzleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleController.h; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				53BA6F62132DBB6C00B98A2C /* images */,
 				32CA4F630368D1EE00C91783 /* TilePuzzle_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -111,6 +114,14 @@
 				28D801B30F44B63D00FB423F /* CoreData.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		53BA6F62132DBB6C00B98A2C /* images */ = {
+			isa = PBXGroup;
+			children = (
+				53BA6F64132DBC3A00B98A2C /* Background.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 		53DD7F6E132AC14D003EA112 /* Controllers */ = {
@@ -191,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				53BA6F65132DBC3A00B98A2C /* Background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
