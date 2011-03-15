@@ -55,9 +55,9 @@
 	int idTracker = 0;
 	NSMutableArray *order = [self randomOrder];
 	
-	for (int row = 0; row < 3; row++) {
+	for (int row = 0; row < 3; row++) {	
 		for (int col = 0; col < 3; col++) {
-			
+		
 			if (row == blankX && col == blankY) {
 				continue; //hole in tile
 			}
@@ -111,14 +111,84 @@
 		}
 	}
 	
+	blankX = 2;
+	blankY = 2;
+	
 	[self loadTiles];
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer;
 {
-	NSLog(@"%s", __PRETTY_FUNCTION__);
-	//UIView	*tappedView = [tapRecognizer view];
-	//tappedView.center = CGPointMake(0, 0);
+
+	BOOL isAdjacent = NO;
+	
+	PuzzleView *pannedView = (PuzzleView *)[tapRecognizer view];
+	
+	/*
+	NSLog(@"Blank position is at x:%i y:%i\n\t Moving tile into it from position x:%i y:%i\n\tTile Identifier:%i", blankX , blankY, [pannedView.xPosition integerValue], [pannedView.yPosition integerValue], [pannedView.orderId integerValue]);
+	 */
+	
+	if (([pannedView.xPosition integerValue] == blankX) && ([pannedView.yPosition integerValue] != blankY)) {
+		
+		if (([pannedView.yPosition integerValue] == (blankY-1)) ||
+			([pannedView.yPosition integerValue] == (blankY+1)) ) {
+			
+			isAdjacent = YES;
+		}
+	}
+		
+	//	Is Y next to it?
+	if (([pannedView.yPosition integerValue] == blankY) && ([pannedView.xPosition integerValue] != blankX)) {
+		
+		if (([pannedView.xPosition integerValue] == (blankX-1)) ||
+				([pannedView.xPosition integerValue] == (blankX+1)) ) {
+			isAdjacent = YES;
+		}
+
+	}
+	
+	if (!isAdjacent) {
+		return;
+	}
+	
+	CGPoint newCenter = pannedView.center;
+	int xCoordinate = [pannedView.xPosition integerValue];
+	int yCoordinate = [pannedView.yPosition integerValue];
+	
+	if ([pannedView.xPosition integerValue] != blankX) {
+		if ([pannedView.xPosition integerValue] > blankX) {
+			newCenter.x -= 105;
+			xCoordinate--;
+		}else if ([pannedView.xPosition integerValue] < blankX) {
+			newCenter.x += 105;
+			xCoordinate++;
+		}
+	}
+	
+	if ([pannedView.yPosition integerValue] != blankY) {
+		if ([pannedView.yPosition integerValue] > blankY) {
+			newCenter.y -= 105;
+			yCoordinate--;
+		}else if ([pannedView.yPosition integerValue] < blankY) {
+			newCenter.y += 105;
+			yCoordinate++;
+		}
+	}
+	
+	//reset the blank coordinates
+	blankX = [pannedView.xPosition integerValue];
+	blankY = [pannedView.yPosition integerValue];
+	
+	//reset tiles posistion
+	[pannedView setXPosition:[NSNumber numberWithInt:xCoordinate]];
+	[pannedView setYPosition:[NSNumber numberWithInt:yCoordinate]];
+	
+	[self.view bringSubviewToFront:pannedView];
+	[PuzzleView animateWithDuration:0.1 animations:^{
+		pannedView.center = newCenter;
+	}];
+	
+	//[self checkSolution];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
@@ -154,7 +224,7 @@
 	
 	CGPoint newCenter = pannedView.center;
 	
-	int xCoordinate = [pannedView.xPosition integerValue] ;
+	int xCoordinate = [pannedView.xPosition integerValue];
 	int yCoordinate = [pannedView.yPosition integerValue];
 	
 	//making everything positive for a simplier comparison 
@@ -194,6 +264,7 @@
 	xIteration = 0;
 	yIteration = 0;
 	
+	//TODO: extract tap boundries into a function and call here
 	if (newCenter.x > 320 || newCenter.x < puzzleSpacer || newCenter.y < puzzleSpacer || newCenter.y > 310) {
 		[[UIApplication sharedApplication] endIgnoringInteractionEvents];
 		return;
@@ -228,7 +299,7 @@
 	
 	[[UIApplication sharedApplication] endIgnoringInteractionEvents];
 	
-	[self checkSolution];
+	//[self checkSolution];
 }
 
 - (void)checkSolution;
@@ -238,6 +309,7 @@
 		return;
 	}
 	
+	/*
 	int checkId =1;
 	BOOL solved = YES;
 	for(PuzzleView *pv in self.view.subviews){
@@ -247,6 +319,48 @@
 				solved = NO;
 			}
 		}
+	}*/
+	
+	BOOL solved = YES;
+	
+	//collect subviews
+	NSMutableArray *views = [[[NSMutableArray alloc] init] autorelease];
+	[views addObjectsFromArray:self.view.subviews];
+	
+	//remove non-PuzzleView subviews
+	for (int count =0; count >[views count]; count++) {
+		if (![[views objectAtIndex:count] isKindOfClass:[PuzzleView class]]) {
+			[views removeObjectAtIndex:count];
+		}
+	}
+	
+	//order
+	//NSSortDescriptor *sortPoint = [[NSSortDescriptor alloc] initWithKey:@"point" ascending:YES]; [hightScore sortUsingDescriptors:[NSArray arrayWithObject:sortPoint]]; 
+	NSSortDescriptor *sortedTiles = [[NSSortDescriptor alloc] initWithKey:@"xPosition" ascending:YES];
+	[views sortUsingDescriptors:[NSArray arrayWithObject:sortedTiles]];
+	
+	/*
+	NSSortDescriptor *sortByX;
+	sortByX = [[[NSSortDescriptor alloc] initWithKey:@"xPosition" ascending:YES] autorelease];
+	NSArray *sortXDescriptors = [NSArray arrayWithObject:sortByX];
+	NSArray *sortedByX;
+	sortedByX = [views sortedArrayUsingDescriptors:sortXDescriptors];
+	 */
+	
+	/*
+	 NSSortDescriptor *sortDescriptor;
+	 sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"birthDate"
+	 ascending:YES] autorelease];
+	 NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+	 NSArray *sortedArray;
+	 sortedArray = [drinkDetails sortedArrayUsingDescriptors:sortDescriptors];
+	 */
+
+	//print results
+	for(PuzzleView *pv in views) {
+		if ([pv isKindOfClass:[PuzzleView class]]) {
+			NSLog(@"pv position x:%i y:%i",[pv.xPosition integerValue], [pv.yPosition integerValue]);
+		}
 	}
 	
 	if (solved == YES) {
@@ -255,7 +369,7 @@
 }
 
 - (NSArray *)randomOrder;
-{
+{	
 	NSMutableArray *order = [[[NSMutableArray alloc] init] autorelease];
 	//TODO:better way to do this?
 	[order addObject:[NSNumber numberWithInt:1]];
@@ -270,12 +384,48 @@
 	
 	NSMutableArray *randOrder = [[[NSMutableArray alloc] init] autorelease];
 	
+	BOOL notSolvable = NO;
+	
 	do {
-		int randomIndex = rand() % [order count];
-		NSLog(@"Random: %i: %i",randomIndex, [[order objectAtIndex:randomIndex] integerValue] );
-		[randOrder addObject:[order objectAtIndex:randomIndex]];
-		[order removeObjectAtIndex:randomIndex];
-	} while ([order count] > 0);
+
+		do {
+			int randomIndex = rand() % [order count];
+			//NSLog(@"Random: %i: %i",randomIndex, [[order objectAtIndex:randomIndex] integerValue] );
+			[randOrder addObject:[order objectAtIndex:randomIndex]];
+			[order removeObjectAtIndex:randomIndex];
+		} while ([order count] > 0);
+
+		int inversionCheck = 0;
+		for (int tileCount = 0; tileCount < [randOrder count]; tileCount++) {
+			//NSLog(@"checking inversions on value %i = %i",tileCount, [[randOrder objectAtIndex:tileCount] integerValue]);
+			
+			for (int checkInversion = tileCount+1; checkInversion <[randOrder count]; checkInversion++) {
+				//NSLog(@"\t%i",[[randOrder objectAtIndex:checkInversion] integerValue]);
+				if ([[randOrder objectAtIndex:tileCount] integerValue] > [[randOrder objectAtIndex:checkInversion] integerValue]) {
+					inversionCheck++;
+				}
+			}
+		}
+		
+		NSLog(@"number of inversions:%i", inversionCheck);
+		
+		if ((inversionCheck % 2) == 0) {
+			notSolvable = YES;			
+		}else {
+			//start over
+			[order addObject:[NSNumber numberWithInt:1]];
+			[order addObject:[NSNumber numberWithInt:2]];
+			[order addObject:[NSNumber numberWithInt:3]];
+			[order addObject:[NSNumber numberWithInt:4]];
+			[order addObject:[NSNumber numberWithInt:5]];
+			[order addObject:[NSNumber numberWithInt:6]];
+			[order addObject:[NSNumber numberWithInt:7]];
+			[order addObject:[NSNumber numberWithInt:8]];
+			
+			[randOrder removeAllObjects];
+		}
+
+	} while (notSolvable == NO);
 	
 	return randOrder;
 }
