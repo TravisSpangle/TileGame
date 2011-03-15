@@ -188,7 +188,7 @@
 		pannedView.center = newCenter;
 	}];
 	
-	//[self checkSolution];
+	[self checkSolution];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
@@ -299,7 +299,7 @@
 	
 	[[UIApplication sharedApplication] endIgnoringInteractionEvents];
 	
-	//[self checkSolution];
+	[self checkSolution];
 }
 
 - (void)checkSolution;
@@ -309,57 +309,42 @@
 		return;
 	}
 	
-	/*
-	int checkId =1;
-	BOOL solved = YES;
-	for(PuzzleView *pv in self.view.subviews){
-		if([pv isKindOfClass:[PuzzleView class]]) {
-			NSLog(@"Comparing check %i to id:%i", checkId, [pv.orderId integerValue]);
-			if (checkId++ != [pv.orderId integerValue]) {
-				solved = NO;
-			}
-		}
-	}*/
-	
 	BOOL solved = YES;
 	
 	//collect subviews
 	NSMutableArray *views = [[[NSMutableArray alloc] init] autorelease];
 	[views addObjectsFromArray:self.view.subviews];
 	
-	//remove non-PuzzleView subviews
-	for (int count =0; count >[views count]; count++) {
-		if (![[views objectAtIndex:count] isKindOfClass:[PuzzleView class]]) {
-			[views removeObjectAtIndex:count];
+	NSMutableArray *tilesToSort = [[[NSMutableArray alloc] init] autorelease];
+	for(PuzzleView *pv in views) {
+		if ([pv isKindOfClass:[PuzzleView class]]) {
+			[tilesToSort addObject:pv];
 		}
 	}
 	
-	//order
-	//NSSortDescriptor *sortPoint = [[NSSortDescriptor alloc] initWithKey:@"point" ascending:YES]; [hightScore sortUsingDescriptors:[NSArray arrayWithObject:sortPoint]]; 
-	NSSortDescriptor *sortedTiles = [[NSSortDescriptor alloc] initWithKey:@"xPosition" ascending:YES];
-	[views sortUsingDescriptors:[NSArray arrayWithObject:sortedTiles]];
+	NSSortDescriptor *sortedTilesByX = [[[NSSortDescriptor alloc] initWithKey:@"xPosition" ascending:YES] autorelease];
+	[tilesToSort sortUsingDescriptors:[NSArray arrayWithObject:sortedTilesByX]];
 	
-	/*
-	NSSortDescriptor *sortByX;
-	sortByX = [[[NSSortDescriptor alloc] initWithKey:@"xPosition" ascending:YES] autorelease];
-	NSArray *sortXDescriptors = [NSArray arrayWithObject:sortByX];
-	NSArray *sortedByX;
-	sortedByX = [views sortedArrayUsingDescriptors:sortXDescriptors];
-	 */
+	NSMutableArray *sortedArray = [NSMutableArray arrayWithCapacity:[tilesToSort count]];
 	
-	/*
-	 NSSortDescriptor *sortDescriptor;
-	 sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"birthDate"
-	 ascending:YES] autorelease];
-	 NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-	 NSArray *sortedArray;
-	 sortedArray = [drinkDetails sortedArrayUsingDescriptors:sortDescriptors];
-	 */
-
-	//print results
-	for(PuzzleView *pv in views) {
+	while([tilesToSort count]) 
+	{
+		id groupLead = [tilesToSort objectAtIndex:0];  
+		NSPredicate *groupPredicate = [NSPredicate predicateWithFormat:@"yPosition = %@", [groupLead yPosition]];
+		
+		NSArray *group = [tilesToSort filteredArrayUsingPredicate: groupPredicate];
+		
+		[sortedArray addObjectsFromArray:group];
+		[tilesToSort removeObjectsInArray:group];
+	}
+		
+	int solutionChecker = 0;
+	for(PuzzleView *pv in sortedArray) {
 		if ([pv isKindOfClass:[PuzzleView class]]) {
-			NSLog(@"pv position x:%i y:%i",[pv.xPosition integerValue], [pv.yPosition integerValue]);
+			NSLog(@"pv position x:%i y:%i id:%i",[pv.xPosition integerValue], [pv.yPosition integerValue], [pv.orderId integerValue]);
+			if (++solutionChecker != [pv.orderId integerValue]) {
+				solved = NO;
+			}
 		}
 	}
 	
