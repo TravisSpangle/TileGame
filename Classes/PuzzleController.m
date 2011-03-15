@@ -370,18 +370,18 @@
 
 - (NSArray *)randomOrder;
 {	
-	NSMutableArray *order = [[[NSMutableArray alloc] init] autorelease];
-	//TODO:better way to do this?
-	[order addObject:[NSNumber numberWithInt:1]];
-	[order addObject:[NSNumber numberWithInt:2]];
-	[order addObject:[NSNumber numberWithInt:3]];
-	[order addObject:[NSNumber numberWithInt:4]];
-	[order addObject:[NSNumber numberWithInt:5]];
-	[order addObject:[NSNumber numberWithInt:6]];
-	[order addObject:[NSNumber numberWithInt:7]];
-	[order addObject:[NSNumber numberWithInt:8]];
-	//[order addObjectsFromArray:[NSArray 
-	
+	NSArray *correctOrder=[[NSArray alloc] initWithObjects:
+						   [NSNumber numberWithInt:1],
+						   [NSNumber numberWithInt:2],
+						   [NSNumber numberWithInt:3],
+						   [NSNumber numberWithInt:4],
+						   [NSNumber numberWithInt:5],
+						   [NSNumber numberWithInt:6],
+						   [NSNumber numberWithInt:7],
+						   [NSNumber numberWithInt:8],
+						   nil];
+
+	NSMutableArray *order = [[[NSMutableArray alloc] initWithArray:correctOrder ] autorelease];
 	NSMutableArray *randOrder = [[[NSMutableArray alloc] init] autorelease];
 	
 	BOOL notSolvable = NO;
@@ -390,42 +390,36 @@
 
 		do {
 			int randomIndex = rand() % [order count];
-			//NSLog(@"Random: %i: %i",randomIndex, [[order objectAtIndex:randomIndex] integerValue] );
+
 			[randOrder addObject:[order objectAtIndex:randomIndex]];
 			[order removeObjectAtIndex:randomIndex];
 		} while ([order count] > 0);
 
+		/*
+		 Loop through array and count cases where the number is greater than the numbers that appear after it (inversions). As the tiles have an odd amount of rows it needs an even number of inversions.
+		 */
 		int inversionCheck = 0;
 		for (int tileCount = 0; tileCount < [randOrder count]; tileCount++) {
-			//NSLog(@"checking inversions on value %i = %i",tileCount, [[randOrder objectAtIndex:tileCount] integerValue]);
 			
 			for (int checkInversion = tileCount+1; checkInversion <[randOrder count]; checkInversion++) {
-				//NSLog(@"\t%i",[[randOrder objectAtIndex:checkInversion] integerValue]);
+
 				if ([[randOrder objectAtIndex:tileCount] integerValue] > [[randOrder objectAtIndex:checkInversion] integerValue]) {
 					inversionCheck++;
 				}
 			}
 		}
 		
-		NSLog(@"number of inversions:%i", inversionCheck);
-		
 		if ((inversionCheck % 2) == 0) {
 			notSolvable = YES;			
 		}else {
 			//start over
-			[order addObject:[NSNumber numberWithInt:1]];
-			[order addObject:[NSNumber numberWithInt:2]];
-			[order addObject:[NSNumber numberWithInt:3]];
-			[order addObject:[NSNumber numberWithInt:4]];
-			[order addObject:[NSNumber numberWithInt:5]];
-			[order addObject:[NSNumber numberWithInt:6]];
-			[order addObject:[NSNumber numberWithInt:7]];
-			[order addObject:[NSNumber numberWithInt:8]];
-			
+			[order addObjectsFromArray:correctOrder];
 			[randOrder removeAllObjects];
 		}
 
 	} while (notSolvable == NO);
+	
+	[correctOrder release];
 	
 	return randOrder;
 }
