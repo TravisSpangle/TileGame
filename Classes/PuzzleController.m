@@ -13,7 +13,7 @@
 
 @interface PuzzleController ()
 - (void)loadTiles;
-- (void)loadEditButton;
+- (void)loadEditButtonSuccessLabel;
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer;
 - (void)handlePan:(UIPanGestureRecognizer *)panRecognizer;
 - (void)checkSolution;
@@ -24,10 +24,15 @@
 @end
 
 @implementation PuzzleController
+@synthesize successLabel;
 
 - (void)loadView;
 {
+	successLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 	self.view = [[[PuzzleView alloc] init] autorelease];
+	[self.view addSubview:successLabel];
+	[successLabel release];
+
 	blankX = 2;
 	blankY = 2;
 	
@@ -40,14 +45,14 @@
 
 - (void)viewDidLoad;
 {	
-	self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Background.png"]];
+	self.view.backgroundColor = [[[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"Background.png"]] autorelease];
 }
 
 - (void)viewDidAppear:(BOOL)animated;
 {
 	[super viewDidAppear:animated];
 	[self loadTiles];
-	[self loadEditButton];
+	[self loadEditButtonSuccessLabel];
 }
 
 - (void)loadTiles;
@@ -62,7 +67,6 @@
 				continue; //hole in tile
 			}
 			
-			//PuzzleView *tileView = [PuzzleView initWithPosition:col yPosition:row];
 			PuzzleView *tileView = [PuzzleView initWithIdWithPosition:[[order objectAtIndex: idTracker++] integerValue] xPosition:col yPosition:row];
 
 			tileView.layer.borderColor = [[UIColor blueColor] CGColor];
@@ -92,7 +96,7 @@
 	}
 }
 
-- (void)loadEditButton;
+- (void)loadEditButtonSuccessLabel;
 {	
 	UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[refreshButton addTarget:self 
@@ -101,6 +105,11 @@
 	[refreshButton setTitle:@"Refresh" forState:UIControlStateNormal];
 	refreshButton.frame = CGRectMake(80.0, 375.0, 160.0, 40.0);
 	[self.view addSubview:refreshButton];
+	
+	CGRect alertFrame = CGRectMake(50, 325, 200.0, 50.0);
+	successLabel.frame = alertFrame;
+	successLabel.textAlignment = UITextAlignmentCenter;
+	successLabel.backgroundColor = [UIColor clearColor];
 }
 
 - (void)refreshPuzzle;
@@ -350,6 +359,7 @@
 	
 	if (solved == YES) {
 		NSLog(@"Solved!");
+		[successLabel setText:@"SUCCESS"];
 	}
 }
 
@@ -374,7 +384,7 @@
 	do {
 
 		do {
-			int randomIndex = rand() % [order count];
+			int randomIndex = arc4random() % [order count];// rand() % [order count];
 
 			[randOrder addObject:[order objectAtIndex:randomIndex]];
 			[order removeObjectAtIndex:randomIndex];
@@ -405,6 +415,8 @@
 	} while (notSolvable == NO);
 	
 	[correctOrder release];
+	
+		[successLabel setText:@""];
 	
 	return randOrder;
 }

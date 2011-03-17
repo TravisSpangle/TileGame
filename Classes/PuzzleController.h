@@ -12,6 +12,9 @@
 @interface PuzzleController : UIViewController {
 	int blankX;
 	int blankY;
+	
+	UILabel *successLabel;
 }
+@property (nonatomic, retain) UILabel * successLabel;
 
 @end
